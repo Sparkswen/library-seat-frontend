@@ -1,3 +1,15 @@
+
+### 前端 README.md
+
+```markdown
+# 图书馆座位预约系统 - 前端
+
+## 技术栈
+- Vue 3
+- Element Plus
+- ECharts
+- Axios
+
 # library-seat-web
 
 This template should help get you started developing with Vue 3 in Vite.
