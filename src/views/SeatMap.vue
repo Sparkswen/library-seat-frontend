@@ -11,14 +11,25 @@
         </el-tag>
         <span class="user-info">积分: {{ userInfo.points || 0 }}</span>
         <span class="user-info">信用: {{ userInfo.creditScore || 100 }}</span>
+        
+        <!-- 管理员/馆员显示返回后台按钮 -->
+        <el-button 
+          v-if="isAdminOrLibrarian" 
+          type="danger" 
+          size="small" 
+          @click="goToAdmin"
+        >
+          ⚙️ 管理后台
+        </el-button>
+        
+        <el-button type="success" size="small" @click="goToStatistics">📊 统计</el-button>
+        <el-button type="warning" size="small" @click="goToStore">🛒 商城</el-button>
+        <el-button type="primary" size="small" @click="goToLeaderboard">🏆 排行榜</el-button>
         <el-button type="info" size="small" @click="goToNotifications">
           🔔 消息
           <el-badge v-if="unreadCount > 0" :value="unreadCount" class="msg-badge" />
         </el-button>
-        <el-button type="success" size="small" @click="goToStatistics">📊 统计</el-button>
-        <el-button type="warning" size="small" @click="goToStore">🛒 商城</el-button>
-        <el-button type="primary" size="small" @click="goToLeaderboard">🏆 排行榜</el-button>
-        <el-button type="danger" size="small" @click="logout">退出</el-button>
+        <el-button type="danger" size="small" @click="confirmLogout">退出</el-button>
       </div>
     </el-header>
 
@@ -83,6 +94,24 @@
         </el-button>
       </div>
     </el-card>
+
+    <!-- 退出确认对话框 -->
+    <el-dialog
+      v-model="logoutDialogVisible"
+      title="确认退出"
+      width="400px"
+      center
+    >
+      <div class="logout-confirm">
+        <el-icon class="warning-icon"><Warning /></el-icon>
+        <p>确定要退出登录吗？</p>
+        <p class="sub-text">退出后需要重新登录</p>
+      </div>
+      <template #footer>
+        <el-button @click="logoutDialogVisible = false">取消</el-button>
+        <el-button type="danger" @click="logout">确定退出</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -90,6 +119,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { Warning } from '@element-plus/icons-vue'
 import request from '../utils/request'
 
 const router = useRouter()
@@ -98,7 +128,13 @@ const currentFloor = ref(1)
 const seats = ref([])
 const currentReservation = ref(null)
 const userInfo = ref({})
-const unreadCount = ref(2) // 未读消息数量
+const unreadCount = ref(2)
+const logoutDialogVisible = ref(false)
+
+// 判断是否为管理员或馆员
+const isAdminOrLibrarian = computed(() => {
+  return userInfo.value.role === 'ADMIN' || userInfo.value.role === 'LIBRARIAN'
+})
 
 const levelType = computed(() => {
   const level = userInfo.value.levelTitle
@@ -150,10 +186,6 @@ const loadCurrentReservation = async () => {
     })
     if (res.code === 200) {
       currentReservation.value = res.data
-      // 保存到localStorage用于消息提醒
-      if (res.data) {
-        localStorage.setItem('currentReservation', JSON.stringify(res.data))
-      }
     }
   } catch (error) {
     console.error('加载当前预约失败')
@@ -212,13 +244,6 @@ const checkOut = async () => {
     if (res.code === 200) {
       ElMessage.success(`退座成功！学习时长：${res.data.studyMinutes}分钟，获得积分：${res.data.pointsEarned}`)
       userInfo.value.levelDisplayName = res.data.currentLevel
-      // 更新localStorage
-      const user = JSON.parse(localStorage.getItem('user') || '{}')
-      user.totalStudyMinutes = (user.totalStudyMinutes || 0) + res.data.studyMinutes
-      user.points = (user.points || 0) + res.data.pointsEarned
-      user.levelDisplayName = res.data.currentLevel
-      localStorage.setItem('user', JSON.stringify(user))
-      loadUserInfo()
       loadSeats()
       loadCurrentReservation()
     } else {
@@ -234,8 +259,14 @@ const formatTime = (time) => {
   return new Date(time).toLocaleString()
 }
 
-const goToNotifications = () => {
-  router.push('/notifications')
+// 显示退出确认对话框
+const confirmLogout = () => {
+  logoutDialogVisible.value = true
+}
+
+// 导航方法
+const goToAdmin = () => {
+  router.push('/admin/dashboard')
 }
 
 const goToStatistics = () => {
@@ -250,10 +281,15 @@ const goToLeaderboard = () => {
   router.push('/leaderboard')
 }
 
+const goToNotifications = () => {
+  router.push('/notifications')
+}
+
 const logout = () => {
+  logoutDialogVisible.value = false
   localStorage.removeItem('user')
-  localStorage.removeItem('currentReservation')
   router.push('/login')
+  ElMessage.success('已退出登录')
 }
 
 onMounted(() => {
@@ -291,11 +327,6 @@ onMounted(() => {
 
 .msg-badge {
   margin-left: 5px;
-}
-
-:deep(.el-badge__content) {
-  top: -5px;
-  right: -5px;
 }
 
 .floor-selector {
@@ -394,5 +425,23 @@ onMounted(() => {
   margin-top: 15px;
   display: flex;
   gap: 10px;
+}
+
+/* 退出确认对话框样式 */
+.logout-confirm {
+  text-align: center;
+  padding: 20px;
+}
+
+.warning-icon {
+  font-size: 48px;
+  color: #e6a23c;
+  margin-bottom: 15px;
+}
+
+.sub-text {
+  color: #909399;
+  font-size: 13px;
+  margin-top: 10px;
 }
 </style>

@@ -47,42 +47,19 @@ const router = createRouter({
       component: Notifications
     },
     {
-      path: '/admin',
-      component: AdminLayout,
-      redirect: '/admin/dashboard',
-      children: [
-        {
-          path: 'dashboard',
-          name: 'dashboard',
-          component: Dashboard
-        },
-        {
-          path: 'seats',
-          name: 'seats',
-          component: Seats
-        },
-        {
-          path: 'reservations',
-          name: 'reservations',
-          component: () => import('../views/admin/Reservations.vue')
-        },
-        {
-          path: 'users',
-          name: 'users',
-          component: () => import('../views/admin/Users.vue')
-        },
-        {
-          path: 'violations',
-          name: 'violations',
-          component: () => import('../views/admin/Violations.vue')
-        },
-        {
-          path: 'reports',
-          name: 'reports',
-          component: () => import('../views/admin/Reports.vue')
-        }
-      ]
-    }
+  path: '/admin',
+  component: AdminLayout,
+  redirect: '/admin/dashboard',
+  children: [
+    { path: 'dashboard', name: 'dashboard', component: Dashboard },
+    { path: 'seats', name: 'seats', component: Seats },
+    { path: 'reservations', name: 'reservations', component: () => import('../views/admin/Reservations.vue') },
+    { path: 'users', name: 'users', component: () => import('../views/admin/Users.vue') },
+    { path: 'violations', name: 'violations', component: () => import('../views/admin/Violations.vue') },
+    { path: 'reports', name: 'reports', component: () => import('../views/admin/Reports.vue') }
+  ]
+}
+
   ]
 })
 
