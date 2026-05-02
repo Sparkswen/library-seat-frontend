@@ -16,6 +16,11 @@
           <el-icon><DataLine /></el-icon>
           <span>数据概览</span>
         </el-menu-item>
+
+        <el-menu-item index="/admin/visualization">
+          <el-icon><TrendCharts /></el-icon>
+          <span>数据可视化</span>
+        </el-menu-item>
         
         <el-menu-item index="/admin/seats">
           <el-icon><OfficeBuilding /></el-icon>
@@ -78,6 +83,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 import { DataLine, OfficeBuilding, Calendar, User, Warning, TrendCharts, ArrowDown } from '@element-plus/icons-vue'
 
 const route = useRoute()
@@ -89,6 +95,7 @@ const activeMenu = computed(() => route.path)
 const currentTitle = computed(() => {
   const titles = {
     '/admin/dashboard': '数据概览',
+    '/admin/visualization': '数据可视化',
     '/admin/seats': '座位管理',
     '/admin/reservations': '预约管理',
     '/admin/users': '用户管理',
