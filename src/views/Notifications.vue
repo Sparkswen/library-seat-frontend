@@ -424,3 +424,15 @@ onMounted(() => {
   border-radius: 8px;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .notifications-content {
+    padding: 10px;
+  }
+  .message-card {
+    margin-bottom: 10px;
+  }
+  .settings-card {
+    margin-bottom: 70px;
+  }
+}

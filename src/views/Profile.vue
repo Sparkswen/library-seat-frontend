@@ -614,3 +614,37 @@ onMounted(() => {
   font-size: 12px;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .profile-content {
+    padding: 10px;
+  }
+  :deep(.el-descriptions) {
+    font-size: 12px;
+  }
+  .stats-row .el-col {
+    margin-bottom: 10px;
+  }
+  .stat-card {
+    padding: 10px;
+  }
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .stat-value {
+    font-size: 20px;
+  }
+  .menu-item {
+    padding: 12px;
+  }
+  .menu-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+  .menu-info h4 {
+    font-size: 14px;
+  }
+}

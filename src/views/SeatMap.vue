@@ -699,3 +699,60 @@ onMounted(() => {
   flex-wrap: wrap;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px;
+  }
+  .header-left h2 {
+    font-size: 16px;
+  }
+  .header-right {
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+  .header-right .el-button {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .user-info {
+    display: none;
+  }
+  .floor-selector {
+    margin: 10px;
+    padding: 10px;
+  }
+  .seat-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .seat-card {
+    padding: 8px;
+  }
+  .seat-no {
+    font-size: 13px;
+  }
+  .seat-status {
+    font-size: 11px;
+  }
+  .legend {
+    gap: 8px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .reservation-status {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: auto;
+    margin: 10px;
+    margin-bottom: 70px;
+  }
+  .time-slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

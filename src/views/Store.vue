@@ -444,3 +444,31 @@ onMounted(() => {
   font-size: 18px;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .store-content {
+    padding: 10px;
+  }
+  .category-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .goods-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .goods-image {
+    height: 140px;
+  }
+  .goods-name {
+    font-size: 14px;
+  }
+  .price-num {
+    font-size: 20px;
+  }
+  .exchange-record {
+    margin-bottom: 70px;
+  }
+}

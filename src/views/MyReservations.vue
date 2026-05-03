@@ -282,3 +282,20 @@ onMounted(() => {
   font-size: 13px;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 10px;
+  }
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+  .el-timeline {
+    padding-left: 10px;
+  }
+}

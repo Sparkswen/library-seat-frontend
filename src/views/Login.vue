@@ -260,3 +260,21 @@ const handleRegister = async () => {
   text-align: center;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 360px;
+  }
+  .login-title {
+    font-size: 18px;
+  }
+  .test-account {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

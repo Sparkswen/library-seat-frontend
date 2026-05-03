@@ -181,3 +181,19 @@ onMounted(() => {
   line-height: 50px;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 0;
+    overflow: hidden;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .admin-header {
+    padding: 0 10px;
+  }
+  .page-content {
+    padding: 10px;
+  }
+}

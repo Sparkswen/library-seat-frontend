@@ -262,3 +262,31 @@ onMounted(() => {
   color: #909399;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .my-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .level-progress {
+    width: 100%;
+  }
+  .level-item {
+    padding: 8px;
+  }
+  .level-item h4 {
+    font-size: 14px;
+  }
+  :deep(.el-table) {
+    font-size: 12px;
+  }
+  :deep(.el-table .cell) {
+    padding: 4px;
+  }
+  .user-cell {
+    gap: 8px;
+  }
+  .user-info .name {
+    font-size: 13px;
+  }
+}

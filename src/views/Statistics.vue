@@ -496,3 +496,32 @@ onMounted(() => {
   height: 100%;
 }
 </style>
+
+@media screen and (max-width: 768px) {
+  .statistics-content {
+    padding: 10px;
+  }
+  .metric-cards .el-col {
+    margin-bottom: 10px;
+  }
+  .metric-card {
+    padding: 10px;
+  }
+  .metric-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+  .metric-value {
+    font-size: 22px;
+  }
+  .chart {
+    height: 250px;
+  }
+  .heatmap-chart {
+    height: 300px;
+  }
+  .record-card {
+    margin-bottom: 70px;
+  }
+}
